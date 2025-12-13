@@ -1,0 +1,14 @@
+#Dependency directories
+node_modules/
+**/node_modules/
+
+#Build directories
+dist/
+build/
+**/dist/
+**/build/
+
+#Miscellaneous files
+/*.txt
+/*.xlsx
+/*.json
