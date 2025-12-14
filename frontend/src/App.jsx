@@ -2,6 +2,7 @@ import React from "react";
 import Home from "./components/Home";
 import Form from "./components/Form";
 import { Routes, Route, Link } from "react-router-dom";
+import Edit from "./components/Edit";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/new" element={<Form />} />
+        <Route path="/edit/:id" element={<Edit />} />
       </Routes>
     </>
   );

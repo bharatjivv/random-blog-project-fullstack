@@ -43,6 +43,7 @@ let blogs = [
 app.use(cors());
 
 app.get('/', (req, res) => {
+  // console.log(blogs)
     res.send('Backend Blog Project')
 })
 
@@ -67,6 +68,29 @@ app.delete('/delete/:id', (req, res) => {
   blogs = blogs.filter((blog) => blog.id !== req.params.id)
   res.status(200).json(blogs)
 })
+
+
+app.get('/edit/:id', (req, res) => {
+  const id = req.params.id;
+  let editBlog = blogs.find((blog) => blog.id === id);
+  res.json(editBlog);
+})
+
+
+app.post('/edit/:id', (req, res) => {
+  const id = req.params.id;
+  const {author, title, content} = req.body;
+
+  const foundBlog = blogs.find((blog) => blog.id === id);
+
+  foundBlog.title = title;
+  foundBlog.author = author;
+  foundBlog.content = content;
+  res.status(200).json({message: "Edited successfully"})
+  
+})
+
+
 
 
 app.listen(3000, () => {

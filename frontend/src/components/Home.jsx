@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
+import {useNavigate} from 'react-router-dom';
 
 function Home() {
   const [blogs, setBlogs] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getData = async () => {
       const data = await fetch("http://localhost:3000/blogs");
       const res = await data.json();
-      console.log(res);
       setBlogs([...res]);
     };
     getData();
@@ -38,17 +39,34 @@ function Home() {
                     </span>{" "}
                     {blog.author}
                   </p>
-                  <div
-                    onClick={async () => {
-                      const res = await fetch(`http://localhost:3000/delete/${blog.id}`, {
-                        method: "DELETE",
-                      });
-                      const data = await res.json();
-                      setBlogs([...data]);
+
+                  <div className="flex justify-between w-full">
+                    <div
+                      onClick={async () => {
+                        const res = await fetch(
+                          `http://localhost:3000/delete/${blog.id}`,
+                          {
+                            method: "DELETE",
+                          }
+                        );
+                        const data = await res.json();
+                        setBlogs([...data]);
+                      }}
+                      className="cursor-pointer flex items-center w-6 "
+                    >
+                      ⚔
+                    </div>
+                    <div 
+                    onClick={() => {
+                      // const data = await fetch(`http://localhost:3000/edit/${blog.id}`)
+                      // const res = await data.json()
+                      // const {author, content, id, title} = res;
+                      // console.log(author, content, id, title)
+                      navigate(`/edit/${blog.id}`)
                     }}
-                    className="cursor-pointer flex items-center w-6"
-                  >
-                    💀
+                    className="cursor-pointer flex items-center w-6 ">
+                      ✏
+                    </div>
                   </div>
                 </li>
               </div>
